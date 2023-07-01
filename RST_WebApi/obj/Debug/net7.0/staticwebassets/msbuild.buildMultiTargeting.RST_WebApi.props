@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\RST_WebApi.props" />
+</Project>
