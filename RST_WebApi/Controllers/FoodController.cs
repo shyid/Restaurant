@@ -114,7 +114,7 @@ namespace RST_WebApi.Controllers
             }
             return _response;
         }
-        [HttpDelete]
+        [HttpDelete("{id:int}", Name = "DeleteVilla")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

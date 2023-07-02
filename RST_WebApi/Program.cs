@@ -10,14 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(MappingConfig));
-
-builder.Services.AddControllers(option => {
-    option.ReturnHttpNotAcceptable=true;
-}).AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    })
-.AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+// for accept just json & xml
+// builder.Services.AddControllers(option => {
+//     option.ReturnHttpNotAcceptable=true;
+// })
+// .AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>(option => {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
