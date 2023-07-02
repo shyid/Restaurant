@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 using RST_WebApi;
 using RST_WebApi.Data;
+using RST_WebApi.Repository.IRepository;
+using RST_WebApi.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +13,16 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddControllers(option => {
     option.ReturnHttpNotAcceptable=true;
-}).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+}).AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    })
+.AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
 builder.Services.AddDbContext<ApplicationDbContext>(option => {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
-
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
