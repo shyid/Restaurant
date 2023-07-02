@@ -16,6 +16,10 @@ namespace RST_WebApi.Data
         {
         }
         public DbSet<Food> Foods { get; set; }
+        public DbSet<Drink> Drinks { get; set; }
+        public DbSet<Appetize> Appetizes { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

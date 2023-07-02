@@ -17,16 +17,16 @@ using RST_WebApi.Repository.IRepository;
 
 namespace RST_WebApi.Controllers
 {
-    [Route("api/FoodApi")]
+    [Route("api/AppetizeApi")]
     [ApiController]
-    public class FoodController : ControllerBase
+    public class AppetizeController : ControllerBase
     {
         protected APIResponse _response;
-        private readonly IFoodRepository _dbFood;
+        private readonly IAppetizeRepository _dbAppetize;
         private readonly IMapper _mapper;
-        public FoodController(IFoodRepository dbFood,IMapper mapper)
+        public AppetizeController(IAppetizeRepository dbAppetize,IMapper mapper)
         {
-            _dbFood = dbFood;
+            _dbAppetize = dbAppetize;
             _mapper = mapper;
             this._response = new();
         }
@@ -35,10 +35,10 @@ namespace RST_WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
-        public async Task<ActionResult<APIResponse>> GetFoods(){
+        public async Task<ActionResult<APIResponse>> GetAppetizes(){
             try{
-                IEnumerable<Food> FoodList = await _dbFood.GetAllAsync();
-                _response.Result = _mapper.Map<List<FoodDTO>>(FoodList);
+                IEnumerable<Appetize> AppetizeList = await _dbAppetize.GetAllAsync();
+                _response.Result = _mapper.Map<List<AppetizeDTO>>(AppetizeList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -51,27 +51,27 @@ namespace RST_WebApi.Controllers
             return _response;
             
         }
-        [HttpGet("{id:int}",Name="GetFoods")]
+        [HttpGet("{id:int}",Name="GetAppetizes")]
         // [ProducesResponseType(StatusCode.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<APIResponse>> GetFoods(int? id){
+        public async Task<ActionResult<APIResponse>> GetAppetizes(int? id){
             try{
                 if(id==0) {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                var Foods = await _dbFood.GetAsync(u=>u.Id == id);
-                if(Foods == null) {
+                var Appetizes = await _dbAppetize.GetAsync(u=>u.Id == id);
+                if(Appetizes == null) {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                _response.Result = _mapper.Map<FoodDTO>(Foods);
+                _response.Result = _mapper.Map<AppetizeDTO>(Appetizes);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -88,23 +88,23 @@ namespace RST_WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> CreateFood([FromBody]Food DtoFood){
+        public async Task<ActionResult<APIResponse>> CreateAppetize([FromBody]Appetize DtoAppetize){
             try{
 
-                if(DtoFood == null) {
+                if(DtoAppetize == null) {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
 
-                Food food = _mapper.Map<Food>(DtoFood);
+                Appetize Appetize = _mapper.Map<Appetize>(DtoAppetize);
 
-                await _dbFood.CreateAsync(food);
+                await _dbAppetize.CreateAsync(Appetize);
 
-                _response.Result = _mapper.Map<FoodDTO>(food);
+                _response.Result = _mapper.Map<AppetizeDTO>(Appetize);
                 _response.StatusCode = HttpStatusCode.Created;
             
-                return CreatedAtRoute("GetFoods",new{id=food.Id} , _response);
+                return CreatedAtRoute("GetAppetizes",new{id=Appetize.Id} , _response);
             }
             catch (Exception ex)
             {
@@ -114,26 +114,26 @@ namespace RST_WebApi.Controllers
             }
             return _response;
         }
-        [HttpDelete("{id:int}", Name = "DeleteFood")]
+        [HttpDelete("{id:int}", Name = "DeleteAppetize")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> DeleteFood(int id){
+        public async Task<ActionResult<APIResponse>> DeleteAppetize(int id){
             try{
                 if(id==0) {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                var Foods = await _dbFood.GetAsync(u=>u.Id == id);
-                if(Foods == null) {
+                var Appetizes = await _dbAppetize.GetAsync(u=>u.Id == id);
+                if(Appetizes == null) {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                await _dbFood.RemoveAsync(Foods);
+                await _dbAppetize.RemoveAsync(Appetizes);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
@@ -146,19 +146,19 @@ namespace RST_WebApi.Controllers
             }
             return _response;
         }
-        [HttpPut("{id:int}",Name="UpdateFood")]
+        [HttpPut("{id:int}",Name="UpdateAppetize")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> UpdateFood(int id,Food DtoFood){
+        public async Task<ActionResult<APIResponse>> UpdateAppetize(int id,Appetize DtoAppetize){
             try{
-                if(id != DtoFood.Id || DtoFood== null) {
+                if(id != DtoAppetize.Id || DtoAppetize== null) {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
 
-                Food model = _mapper.Map<Food>(DtoFood);
-                await _dbFood.UpdateAsync(model);
+                Appetize model = _mapper.Map<Appetize>(DtoAppetize);
+                await _dbAppetize.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
@@ -171,20 +171,20 @@ namespace RST_WebApi.Controllers
             }
             return _response;
         }
-        [HttpPatch("{id:int}",Name="UpdatePartialFood")]
+        [HttpPatch("{id:int}",Name="UpdatePartialAppetize")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdatePartialFood(int id ,JsonPatchDocument<FoodDTO> PatchDto){
+        public async Task<ActionResult> UpdatePartialAppetize(int id ,JsonPatchDocument<AppetizeDTO> PatchDto){
             if(id ==0 || PatchDto== null) return BadRequest();
-            var Foods = await _dbFood.GetAsync(u=>u.Id == id , tracked:false);
+            var Appetizes = await _dbAppetize.GetAsync(u=>u.Id == id , tracked:false);
 
-            FoodDTO FoodDtoModel = _mapper.Map<FoodDTO>(Foods);  
+            AppetizeDTO AppetizeDtoModel = _mapper.Map<AppetizeDTO>(Appetizes);  
             
-            if(Foods == null) BadRequest();
-            PatchDto.ApplyTo(FoodDtoModel , ModelState);
-            Food model = _mapper.Map<Food>(FoodDtoModel);
+            if(Appetizes == null) BadRequest();
+            PatchDto.ApplyTo(AppetizeDtoModel , ModelState);
+            Appetize model = _mapper.Map<Appetize>(AppetizeDtoModel);
 
-            await _dbFood.UpdateAsync(model);
+            await _dbAppetize.UpdateAsync(model);
             if(!ModelState.IsValid) return BadRequest(ModelState);
             return NoContent();
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RST_WebApi.Data;
 
@@ -11,9 +12,11 @@ using RST_WebApi.Data;
 namespace RST_WebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230702101734_orderTB")]
+    partial class orderTB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,7 +139,7 @@ namespace RST_WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 7, 2, 14, 2, 18, 876, DateTimeKind.Local).AddTicks(7563),
+                            CreatedDate = new DateTime(2023, 7, 2, 13, 47, 34, 323, DateTimeKind.Local).AddTicks(53),
                             Details = "It has pepperoni and pizza cheese",
                             FoodStatus = 0,
                             ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
@@ -147,7 +150,7 @@ namespace RST_WebApi.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 7, 2, 14, 2, 18, 876, DateTimeKind.Local).AddTicks(7585),
+                            CreatedDate = new DateTime(2023, 7, 2, 13, 47, 34, 323, DateTimeKind.Local).AddTicks(76),
                             Details = "It has meat, mushroom and pizza cheese",
                             FoodStatus = 0,
                             ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
@@ -158,7 +161,7 @@ namespace RST_WebApi.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 7, 2, 14, 2, 18, 876, DateTimeKind.Local).AddTicks(7589),
+                            CreatedDate = new DateTime(2023, 7, 2, 13, 47, 34, 323, DateTimeKind.Local).AddTicks(81),
                             Details = "It has chicken, mushroom and cheese pizza",
                             FoodStatus = 0,
                             ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
@@ -166,102 +169,6 @@ namespace RST_WebApi.Migrations
                             Rate = 150.0,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
-                });
-
-            modelBuilder.Entity("RST_WebApi.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("RST_WebApi.Models.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdAppetize")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDrink")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdFood")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdAppetize");
-
-                    b.HasIndex("IdDrink");
-
-                    b.HasIndex("IdFood");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItems");
-                });
-
-            modelBuilder.Entity("RST_WebApi.Models.OrderItem", b =>
-                {
-                    b.HasOne("RST_WebApi.Models.Appetize", "Appetize")
-                        .WithMany()
-                        .HasForeignKey("IdAppetize")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RST_WebApi.Models.Drink", "Drink")
-                        .WithMany()
-                        .HasForeignKey("IdDrink")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RST_WebApi.Models.Food", "Food")
-                        .WithMany()
-                        .HasForeignKey("IdFood")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RST_WebApi.Models.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Appetize");
-
-                    b.Navigation("Drink");
-
-                    b.Navigation("Food");
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("RST_WebApi.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }
