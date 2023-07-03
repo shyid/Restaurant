@@ -16,7 +16,7 @@ namespace RST_WebApi.Models.Dto
         public string Details { get; set; }
         public double Rate { get; set; }
         public string ImageUrl { get; set; }
-        public FoodStatus FoodStatus {get;set;} 
+        public EVStatus EVStatus {get;set;} 
         
         
     }

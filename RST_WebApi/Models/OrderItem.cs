@@ -32,5 +32,7 @@ namespace RST_WebApi.Models
         [ForeignKey("Appetize")]
         public int IdAppetize { get; set; }
         public Appetize? Appetize { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

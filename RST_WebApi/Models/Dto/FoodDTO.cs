@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace RST_WebApi.Models.Dto
 {
+    // dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore   
+    // dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson 
     public class FoodDTO
     {
         public int Id { get; set; }
@@ -17,7 +19,7 @@ namespace RST_WebApi.Models.Dto
         [Required]
         public double Rate { get; set; }
         public string ImageUrl { get; set; }
-        public FoodStatus FoodStatus {get;set;} 
+        public EVStatus EVStatus {get;set;} 
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         

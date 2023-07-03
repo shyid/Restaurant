@@ -31,7 +31,7 @@ namespace RST_WebApi.Data
                 Details = "It has pepperoni and pizza cheese",
                 ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
                 Rate = 150,
-                FoodStatus = 0,
+                EVStatus = 0,
                 CreatedDate = DateTime.Now
                 },
               new Food
@@ -41,7 +41,7 @@ namespace RST_WebApi.Data
                 Details = "It has meat, mushroom and pizza cheese",
                 ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
                 Rate = 150,
-                FoodStatus = 0,
+                EVStatus = 0,
                 CreatedDate = DateTime.Now
               },
               new Food
@@ -51,7 +51,7 @@ namespace RST_WebApi.Data
                 Details = "It has chicken, mushroom and cheese pizza",
                 ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
                 Rate = 150,
-                FoodStatus = 0,
+                EVStatus = 0,
                 CreatedDate = DateTime.Now
               }
               

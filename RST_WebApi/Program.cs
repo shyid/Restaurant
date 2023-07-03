@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-
+using InvisibleApi.Extensions;
 
 using RST_WebApi;
 using RST_WebApi.Data;
 using RST_WebApi.Repository.IRepository;
 using RST_WebApi.Repository;
+using InvisibleApi.Models.InvisibleApiConfigurations;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => {
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 builder.Services.AddScoped<IDrinkRepository, DrinkRepository>();
 builder.Services.AddScoped<IAppetizeRepository, AppetizeRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,6 +42,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
 
 app.MapControllers();
 

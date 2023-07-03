@@ -88,6 +88,18 @@
           }
         }
       },
+      "InvisibleApi/0.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/InvisibleApi.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/InvisibleApi.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.8": {
         "type": "package",
         "dependencies": {
@@ -1664,6 +1676,20 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "InvisibleApi/0.0.1": {
+      "sha512": "1YVAh4Tlrkq8g01QPCSttYluxDYwlIWeD3gPY3aU6zr90el9xNBfXhDrnMphx3hp/fu8ie0FG3WI6q0RYx5Zig==",
+      "type": "package",
+      "path": "invisibleapi/0.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "api.png",
+        "invisibleapi.0.0.1.nupkg.sha512",
+        "invisibleapi.nuspec",
+        "lib/netstandard2.1/InvisibleApi.dll"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.8": {
@@ -4569,6 +4595,7 @@
     "net7.0": [
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
+      "InvisibleApi >= 0.0.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.8",
       "Microsoft.AspNetCore.JsonPatch >= 7.0.8",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 7.0.8",
@@ -4627,6 +4654,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"
+          },
+          "InvisibleApi": {
+            "target": "Package",
+            "version": "[0.0.1, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

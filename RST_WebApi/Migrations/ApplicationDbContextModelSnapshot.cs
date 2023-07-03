@@ -37,7 +37,7 @@ namespace RST_WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FoodStatus")
+                    b.Property<int>("EVStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -74,7 +74,7 @@ namespace RST_WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FoodStatus")
+                    b.Property<int>("EVStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -111,7 +111,7 @@ namespace RST_WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FoodStatus")
+                    b.Property<int>("EVStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -136,9 +136,9 @@ namespace RST_WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 7, 2, 14, 2, 18, 876, DateTimeKind.Local).AddTicks(7563),
+                            CreatedDate = new DateTime(2023, 7, 3, 11, 21, 21, 918, DateTimeKind.Local).AddTicks(1054),
                             Details = "It has pepperoni and pizza cheese",
-                            FoodStatus = 0,
+                            EVStatus = 0,
                             ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
                             Name = "Pepperoni pizza",
                             Rate = 150.0,
@@ -147,9 +147,9 @@ namespace RST_WebApi.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 7, 2, 14, 2, 18, 876, DateTimeKind.Local).AddTicks(7585),
+                            CreatedDate = new DateTime(2023, 7, 3, 11, 21, 21, 918, DateTimeKind.Local).AddTicks(1073),
                             Details = "It has meat, mushroom and pizza cheese",
-                            FoodStatus = 0,
+                            EVStatus = 0,
                             ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
                             Name = "Meat pizza",
                             Rate = 150.0,
@@ -158,9 +158,9 @@ namespace RST_WebApi.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 7, 2, 14, 2, 18, 876, DateTimeKind.Local).AddTicks(7589),
+                            CreatedDate = new DateTime(2023, 7, 3, 11, 21, 21, 918, DateTimeKind.Local).AddTicks(1081),
                             Details = "It has chicken, mushroom and cheese pizza",
-                            FoodStatus = 0,
+                            EVStatus = 0,
                             ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
                             Name = "Chicken pizza",
                             Rate = 150.0,
@@ -176,9 +176,15 @@ namespace RST_WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -196,6 +202,9 @@ namespace RST_WebApi.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("IdAppetize")
                         .HasColumnType("int");
 
@@ -210,6 +219,9 @@ namespace RST_WebApi.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

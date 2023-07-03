@@ -1,6 +1,6 @@
 namespace RST_WebApi.Models
 {
-    public enum FoodStatus
+    public enum EVStatus
     {
         Inactive = 0, active
     }
