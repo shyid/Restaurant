@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using RST_WebApi.Models;
+namespace RST_WebApi.Models.Dto
+{
+    public class LoginResponseDTO
+    {
+        public UserDTO User { get; set; }
+        public string Token { get; set; }
+        public string Role { get; set; }
+    }
+}

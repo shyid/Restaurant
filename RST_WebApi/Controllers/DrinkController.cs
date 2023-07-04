@@ -14,6 +14,7 @@ using RST_WebApi.Data;
 using RST_WebApi.Models;
 using RST_WebApi.Models.Dto;
 using RST_WebApi.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RST_WebApi.Controllers
 {
@@ -84,6 +85,7 @@ namespace RST_WebApi.Controllers
             return _response;
             
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -120,6 +122,7 @@ namespace RST_WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> DeleteDrink(int id){
             try{
                 if(id==0) {
@@ -146,6 +149,7 @@ namespace RST_WebApi.Controllers
             }
             return _response;
         }
+        [Authorize(Roles = "admin")]
         [HttpPut("{id:int}",Name="UpdateDrink")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
