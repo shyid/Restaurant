@@ -39,7 +39,14 @@ namespace RST_WebApi.Controllers
         public async Task<ActionResult<APIResponse>> GetAppetizes(){
             try{
                 IEnumerable<Appetize> AppetizeList = await _dbAppetize.GetAllAsync();
-                _response.Result = _mapper.Map<List<AppetizeDTO>>(AppetizeList);
+                List<Appetize> listresult = new List <Appetize> ();
+                foreach(var f in AppetizeList){
+                    if(f.Hidden){
+                        continue;
+                    }
+                    listresult.Add(f);
+                }
+                _response.Result = _mapper.Map<List<AppetizeDTO>>(listresult);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -66,13 +73,13 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                var Appetizes = await _dbAppetize.GetAsync(u=>u.Id == id);
-                if(Appetizes == null) {
+                var Appetize = await _dbAppetize.GetAsync(u=>u.Id == id);
+                if(Appetize == null || Appetize.Hidden) {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                _response.Result = _mapper.Map<AppetizeDTO>(Appetizes);
+                _response.Result = _mapper.Map<AppetizeDTO>(Appetize);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -136,7 +143,9 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                await _dbAppetize.RemoveAsync(Appetizes);
+                Appetizes.Hidden = true;
+                await _dbAppetize.SaveAsync();
+                // await _dbAppetize.RemoveAsync(Appetizes);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);

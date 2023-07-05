@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RST_WebApi.Models.Dto
+namespace RST_WebApi.Models
 {
-    public class DrinkDTO
+    public class RSTClassBase
     {
-        [Required]
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string Details { get; set; }
@@ -18,5 +15,7 @@ namespace RST_WebApi.Models.Dto
         public string ImageUrl { get; set; }
         public EVStatus EVStatus {get;set;} 
         public bool Hidden {get;set;} = false ;
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

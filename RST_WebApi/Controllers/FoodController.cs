@@ -39,9 +39,17 @@ namespace RST_WebApi.Controllers
         public async Task<ActionResult<APIResponse>> GetFoods(){
             try{
                 IEnumerable<Food> FoodList = await _dbFood.GetAllAsync();
-                _response.Result = _mapper.Map<List<FoodDTO>>(FoodList);
+
+                List<Food> listresult = new List <Food> ();
+                foreach(var f in FoodList){
+                    if(f.Hidden){
+                        continue;
+                    }
+                    listresult.Add(f);
+                }
+                _response.Result = _mapper.Map<List<FoodDTO>>(listresult);
                 _response.StatusCode = HttpStatusCode.OK;
-                return  Ok(_response);
+                return  Ok(_response);            
             }
             catch (Exception ex)
             {
@@ -66,13 +74,14 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                var Foods = await _dbFood.GetAsync(u=>u.Id == id);
-                if(Foods == null) {
+
+                var Food = await _dbFood.GetAsync(u=>u.Id == id );
+                if(Food == null || Food.Hidden) {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
-                    return NotFound(_response);
+                    return NotFound(_response);                  
                 }
-                _response.Result = _mapper.Map<FoodDTO>(Foods);
+                _response.Result = _mapper.Map<FoodDTO>(Food);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -136,7 +145,9 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                await _dbFood.RemoveAsync(Foods);
+                Foods.Hidden = true;
+                await _dbFood.SaveAsync();
+                // await _dbFood.RemoveAsync(Foods);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);

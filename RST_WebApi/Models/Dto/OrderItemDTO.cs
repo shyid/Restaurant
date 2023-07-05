@@ -13,7 +13,7 @@ namespace RST_WebApi.Models
 
         public int Amount { get; set; }
         public double Price { get; set; }
-
+        
 
         public int OrderId { get; set; }
         

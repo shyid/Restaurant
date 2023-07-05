@@ -39,7 +39,14 @@ namespace RST_WebApi.Controllers
         public async Task<ActionResult<APIResponse>> GetDrinks(){
             try{
                 IEnumerable<Drink> DrinkList = await _dbDrink.GetAllAsync();
-                _response.Result = _mapper.Map<List<DrinkDTO>>(DrinkList);
+                List<Drink> listresult = new List <Drink> ();
+                foreach(var f in DrinkList){
+                    if(f.Hidden){
+                        continue;
+                    }
+                    listresult.Add(f);
+                }
+                _response.Result = _mapper.Map<List<DrinkDTO>>(listresult);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -66,13 +73,13 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                var Drinks = await _dbDrink.GetAsync(u=>u.Id == id);
-                if(Drinks == null) {
+                var Drink = await _dbDrink.GetAsync(u=>u.Id == id);
+                if(Drink == null || Drink.Hidden) {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                _response.Result = _mapper.Map<DrinkDTO>(Drinks);
+                _response.Result = _mapper.Map<DrinkDTO>(Drink);
                 _response.StatusCode = HttpStatusCode.OK;
                 return  Ok(_response);
             }
@@ -136,7 +143,9 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                await _dbDrink.RemoveAsync(Drinks);
+                Drinks.Hidden = true;
+                await _dbDrink.SaveAsync();
+                // await _dbDrink.RemoveAsync(Drinks);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);

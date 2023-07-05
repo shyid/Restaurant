@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RST_WebApi.Data;
 
@@ -11,9 +12,11 @@ using RST_WebApi.Data;
 namespace RST_WebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230705104416_UPTBDrink")]
+    partial class UPTBDrink
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,9 +176,6 @@ namespace RST_WebApi.Migrations
                     b.Property<int>("EVStatus")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Hidden")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -282,9 +282,6 @@ namespace RST_WebApi.Migrations
                     b.Property<int>("EVStatus")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Hidden")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -322,9 +319,6 @@ namespace RST_WebApi.Migrations
                     b.Property<int>("EVStatus")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Hidden")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -342,6 +336,41 @@ namespace RST_WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Foods");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 7, 5, 14, 14, 15, 944, DateTimeKind.Local).AddTicks(8182),
+                            Details = "It has pepperoni and pizza cheese",
+                            EVStatus = 0,
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
+                            Name = "Pepperoni pizza",
+                            Rate = 150.0,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 7, 5, 14, 14, 15, 944, DateTimeKind.Local).AddTicks(8203),
+                            Details = "It has meat, mushroom and pizza cheese",
+                            EVStatus = 0,
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
+                            Name = "Meat pizza",
+                            Rate = 150.0,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2023, 7, 5, 14, 14, 15, 944, DateTimeKind.Local).AddTicks(8207),
+                            Details = "It has chicken, mushroom and cheese pizza",
+                            EVStatus = 0,
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
+                            Name = "Chicken pizza",
+                            Rate = 150.0,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("RST_WebApi.Models.LocalUser", b =>

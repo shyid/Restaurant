@@ -17,6 +17,7 @@ namespace RST_WebApi.Models.Dto
         public double Rate { get; set; }
         public string ImageUrl { get; set; }
         public EVStatus EVStatus {get;set;} 
+        public bool Hidden {get;set;} = false ;
         
         
     }

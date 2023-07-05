@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0XJS7/C9Z1LLekseOiFFGadx3peWwbgqgxbY2RXlS36SHAfYnRyzknm7B3Lf9c1w1a7yo0DoVpPgX2/yv7KN+w==",
+  "dgSpecHash": "mBYQp304CSQ00dKQZR1vw7KGTHq28r7SxNjjwPWBDBC19hBoqglws17GRJVjHBJgWsxtwKczhaoo6kUHe1GOiQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_webapi\\RST_WebApi.csproj",
+  "projectFilePath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_webapi\\RST_WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\asus\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

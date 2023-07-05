@@ -22,6 +22,7 @@ namespace RST_WebApi.Models.Dto
         public EVStatus EVStatus {get;set;} 
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public bool Hidden {get;set;} = false ;
         
     }
 }

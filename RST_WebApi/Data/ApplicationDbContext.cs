@@ -16,6 +16,7 @@ namespace RST_WebApi.Data
             : base(options)
         {
         }
+        // public DbSet<RSTClassBase> RSTClassBases { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Food> Foods { get; set; }
         public DbSet<Drink> Drinks { get; set; }
@@ -26,39 +27,29 @@ namespace RST_WebApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Food>().HasData(
-                new Food
-                {
-                Id = 1,
-                Name = "Pepperoni pizza",
-                Details = "It has pepperoni and pizza cheese",
-                ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
-                Rate = 150,
-                EVStatus = 0,
-                CreatedDate = DateTime.Now
-                },
-              new Food
-              {
-                Id = 2,
-                Name = "Meat pizza",
-                Details = "It has meat, mushroom and pizza cheese",
-                ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
-                Rate = 150,
-                EVStatus = 0,
-                CreatedDate = DateTime.Now
-              },
-              new Food
-              {
-                Id = 3,
-                Name = "Chicken pizza",
-                Details = "It has chicken, mushroom and cheese pizza",
-                ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
-                Rate = 150,
-                EVStatus = 0,
-                CreatedDate = DateTime.Now
-              }
+            // modelBuilder.Entity<Food>().HasData(
+            //     new Food
+            //     {
+            //     Id = 1,
+            //     Name = "Pepperoni pizza",
+            //     Details = "It has pepperoni and pizza cheese",
+            //     ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
+            //     Rate = 150,
+            //     EVStatus = 0,
+            //     CreatedDate = DateTime.Now
+            //     },
+            //   new Food
+            //   {
+            //     Id = 2,
+            //     Name = "Meat pizza",
+            //     Details = "It has meat, mushroom and pizza cheese",
+            //     ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
+            //     Rate = 150,
+            //     EVStatus = 0,
+            //     CreatedDate = DateTime.Now
+            //   }
               
-            );
+            // );
         }
     }
 }
