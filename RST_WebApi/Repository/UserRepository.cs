@@ -69,7 +69,7 @@ namespace RST_WebApi.Repository
                 {
                     // new Claim(ClaimTypes.Name, user.UserName.ToString()),
                     // new Claim(ClaimTypes.Role, roles.FirstOrDefault())
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.UserName.ToString()),
                     new Claim(ClaimTypes.Role, roles.FirstOrDefault())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
@@ -80,8 +80,8 @@ namespace RST_WebApi.Repository
             LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
             {
                 Token = tokenHandler.WriteToken(token),
-                User = _mapper.Map<UserDTO>(user),
-                Role = roles.FirstOrDefault()
+                User = _mapper.Map<UserDTO>(user)
+                // Role = roles.FirstOrDefault()
                 
             };
             return loginResponseDTO;
@@ -110,7 +110,12 @@ namespace RST_WebApi.Repository
                         await _roleManager.CreateAsync(new IdentityRole("admin"));
                         await _roleManager.CreateAsync(new IdentityRole("customer"));
                     }
-                    await _userManager.AddToRoleAsync(user, "admin");
+                    if(registerationRequestDTO.Role.ToLower() == "admin"){
+                        await _userManager.AddToRoleAsync(user, "admin");
+                    }else{
+                        await _userManager.AddToRoleAsync(user, "customer");
+                    }
+                    // await _userManager.AddToRoleAsync(user, "admin");
                     var userToReturn = _db.applicationUsers
                         .FirstOrDefault(u => u.UserName == registerationRequestDTO.UserName);
                     return _mapper.Map<UserDTO>(userToReturn);

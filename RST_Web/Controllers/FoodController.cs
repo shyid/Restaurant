@@ -29,7 +29,7 @@ namespace RST_Web.Controllers
         public async Task<IActionResult> IndexFood()
         {
             List<FoodDTO> list = new();
-            // HttpContext.Session.GetString(SD.SessionToken)
+            // HttpContext.Session.GetString(SD.SessionToken);
             var response = await _FoodService.GetAllAsync<APIResponse>();
             if (response != null && response.IsSuccess)
             {
