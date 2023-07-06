@@ -8,10 +8,10 @@ namespace RST_Web.Server.IServer
 {
     public interface IFoodService
     {
-        Task<T> GetAllAsync<T>();
-        Task<T> GetAsync<T>(int id);
-        Task<T> CreateAsync<T>(FoodDTO dto );
-        Task<T> UpdateAsync<T>(FoodDTO dto );
-        Task<T> DeleteAsync<T>(int id );
+        Task<T> GetAllAsync<T>(string token);
+        Task<T> GetAsync<T>(int id,string token);
+        Task<T> CreateAsync<T>(FoodDTO dto,string token );
+        Task<T> UpdateAsync<T>(FoodDTO dto ,string token);
+        Task<T> DeleteAsync<T>(int id ,string token);
     }
 }

@@ -37,3 +37,8 @@ C:\Users\asus\Desktop\Restaurant\RST_Web\obj\Debug\net7.0\RST_Web.pdb
 C:\Users\asus\Desktop\Restaurant\RST_Web\obj\Debug\net7.0\RST_Web.genruntimeconfig.cache
 C:\Users\asus\Desktop\Restaurant\RST_Web\obj\Debug\net7.0\ref\RST_Web.dll
 C:\Users\asus\Desktop\Restaurant\RST_Web\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\asus\Desktop\Restaurant\RST_Web\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\asus\Desktop\Restaurant\RST_Web\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\asus\Desktop\Restaurant\RST_Web\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\asus\Desktop\Restaurant\RST_Web\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\asus\Desktop\Restaurant\RST_Web\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

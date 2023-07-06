@@ -21,55 +21,55 @@ namespace RST_Web.Server
 
         }
 
-        public Task<T> CreateAsync<T>(FoodDTO dto)
+        public Task<T> CreateAsync<T>(FoodDTO dto,string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = villaUrl + "/api/FoodAPI",
-                // Token = token
+                Url = villaUrl + "/api/FoodAPI/",
+                Token = token
             });
         }
 
-        public Task<T> DeleteAsync<T>(int id)
+        public Task<T> DeleteAsync<T>(int id,string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = villaUrl + "/api//" + id,
-                // Token = token
+                Url = villaUrl + "/api/FoodAPI/" + id,
+                Token = token
             });
         }
 
-        public Task<T> GetAllAsync<T>()
+        public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = villaUrl + "/api/FoodAPI",
-                // Token = token
+                Url = villaUrl + "/api/FoodAPI/",
+                Token = token
             });
         }
 
-        public Task<T> GetAsync<T>(int id)
+        public Task<T> GetAsync<T>(int id,string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.GET,
                 Url = villaUrl + "/api/FoodAPI/" + id,
-                // Token = token
+                Token = token
             });
         }
 
-        public Task<T> UpdateAsync<T>(FoodDTO dto)
+        public Task<T> UpdateAsync<T>(FoodDTO dto ,string token)
         {
             return SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
                 Url = villaUrl + "/api/FoodAPI/" + dto.Id,
-                // Token = token
+                Token = token
             }) ;
         }
         

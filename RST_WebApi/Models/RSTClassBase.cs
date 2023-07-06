@@ -10,9 +10,9 @@ namespace RST_WebApi.Models
     {
         [Required]
         public string Name { get; set; }
-        public string Details { get; set; }
+        public string? Details { get; set; }
         public double Rate { get; set; }
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public EVStatus EVStatus {get;set;} 
         public bool Hidden {get;set;} = false ;
         public DateTime CreatedDate { get; set; }
