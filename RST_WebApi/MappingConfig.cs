@@ -19,6 +19,7 @@ namespace RST_WebApi
             CreateMap<Order, OrderDTO>().ReverseMap();
             CreateMap<OrderItem, OrderItemDTO>().ReverseMap();
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
+            CreateMap<ImageFile, ImageFileDTO>().ReverseMap();
         }
     
         
