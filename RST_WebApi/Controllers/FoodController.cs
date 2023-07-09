@@ -99,7 +99,7 @@ namespace RST_WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> CreateFood([FromBody]Food DtoFood){
+        public async Task<ActionResult<APIResponse>> CreateFood([FromForm]FoodDTO DtoFood){
             try{
 
                 if(DtoFood == null) {
@@ -107,15 +107,22 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
+                ValidateFileUpload(DtoFood);
+                if (ModelState.IsValid)
+                {
+                    Food food = _mapper.Map<Food>(DtoFood);
 
-                Food food = _mapper.Map<Food>(DtoFood);
+                    // var lastId= food.Max(u=>u.Id) +1;
+                    var lastId= food.Id +1;
 
-                await _dbFood.CreateAsync(food);
+                    await _dbFood.UploadImage(food , lastId);
+                    await _dbFood.CreateAsync(food);
 
-                _response.Result = _mapper.Map<FoodDTO>(food);
-                _response.StatusCode = HttpStatusCode.Created;
-            
-                return CreatedAtRoute("GetFoods",new{id=food.Id} , _response);
+                    _response.Result = _mapper.Map<FoodDTO>(food);
+                    _response.StatusCode = HttpStatusCode.Created;
+                
+                    return CreatedAtRoute("GetFoods",new{id=food.Id} , _response);
+                }
             }
             catch (Exception ex)
             {
@@ -164,19 +171,26 @@ namespace RST_WebApi.Controllers
         [HttpPut("{id:int}",Name="UpdateFood")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> UpdateFood(int id,Food DtoFood){
+        public async Task<ActionResult<APIResponse>> UpdateFood(int id,[FromForm]FoodDTO DtoFood){
             try{
                 if(id != DtoFood.Id || DtoFood== null) {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
+                ValidateFileUpload(DtoFood);
+                if (ModelState.IsValid)
+                {
+                    Food model = _mapper.Map<Food>(DtoFood);
+                    
+                    var lastId= model.Id ;
 
-                Food model = _mapper.Map<Food>(DtoFood);
-                await _dbFood.UpdateAsync(model);
-                _response.StatusCode = HttpStatusCode.NoContent;
-                _response.IsSuccess = true;
-                return Ok(_response);
+                    await _dbFood.UploadImage(model,lastId);
+                    await _dbFood.UpdateAsync(model);
+                    _response.StatusCode = HttpStatusCode.NoContent;
+                    _response.IsSuccess = true;
+                    return Ok(_response);
+                }
             }
             catch (Exception ex)
             {
@@ -202,6 +216,21 @@ namespace RST_WebApi.Controllers
             await _dbFood.UpdateAsync(model);
             if(!ModelState.IsValid) return BadRequest(ModelState);
             return NoContent();
+        }
+
+        private void ValidateFileUpload(FoodDTO request)
+        {
+            var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png" };
+
+            if (!allowedExtensions.Contains(Path.GetExtension(request.File.FileName)))
+            {
+                ModelState.AddModelError("file", "Unsupported file extension");
+            }
+
+            if (request.File.Length > 10485760)
+            {
+                ModelState.AddModelError("file", "File size more than 10MB, please upload a smaller size file.");
+            }
         }
     }
 }
