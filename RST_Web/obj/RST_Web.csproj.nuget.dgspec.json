@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\asus\\Desktop\\Restaurant\\rst_web\\RST_Web.csproj": {}
+    "C:\\Users\\asus\\Desktop\\Restaurant\\RST_Web\\RST_Web.csproj": {}
   },
   "projects": {
     "C:\\Users\\asus\\Desktop\\Restaurant\\RST_Utility\\RST_Utility.csproj": {
@@ -57,14 +57,14 @@
         }
       }
     },
-    "C:\\Users\\asus\\Desktop\\Restaurant\\rst_web\\RST_Web.csproj": {
+    "C:\\Users\\asus\\Desktop\\Restaurant\\RST_Web\\RST_Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_web\\RST_Web.csproj",
+        "projectUniqueName": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_Web\\RST_Web.csproj",
         "projectName": "RST_Web",
-        "projectPath": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_web\\RST_Web.csproj",
+        "projectPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_Web\\RST_Web.csproj",
         "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_web\\obj\\",
+        "outputPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config"

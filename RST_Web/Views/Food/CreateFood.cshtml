@@ -1,6 +1,7 @@
+@* @using (Html.BeginForm("CreateFood","Food", FormMethod.Post, new { enctype = "multipart/form-data"})) *@
 @model RST_Web.Models.Dto.FoodDTO
 
-<form asp-action="CreateFood">
+<form enctype="multipart/form-data" method="post" asp-action="CreateFood">
     <br />
     <div class="container border p-3">
         <h1 class="text-primary">Create Food</h1>
@@ -34,11 +35,12 @@
             </div>
 
             <div class="col-2">
-                <label asp-for="ImageUrl" class="control-label pt-2" style="font-size:20px;"></label>
+                <label asp-for="File" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
+           
             <div class="col-10 pb-3">
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <input type="file"  asp-for="File" style="width: 100%;"/>
+                <span asp-validation-for="File" class="text-danger"></span>
             </div>
 
             <div class="col-2">
@@ -48,7 +50,11 @@
                 <input asp-for="EVStatus" class="form-control" />
                 <span asp-validation-for="EVStatus" class="text-danger"></span>
             </div>
-          
+            @* show image *@
+            <div class="col-md-4 offset-4 text-center">
+                <img width="100%" id="ImageUrlPreview" />
+            </div>
+            @*  *@
             </div>
             <div class="col-5 offset-2">
                 <a asp-action="IndexFood" asp-controller="Food" class="btn-primary btn form-control ">Back to List</a>
@@ -60,7 +66,13 @@
     </div>
 </form>
 
-                
-@section Scripts {
-    <partial name="_ValidationScriptsPartial"/>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/> 
+    <script>
+        $("#ImageURL").on("change", function () {
+            var output = document.getElementById("ImageUrlPreview");
+            output.src = $(this).val();
+        })
+    </script>
 }

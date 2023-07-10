@@ -8,7 +8,7 @@ namespace RST_WebApi.Repository.IRepository
 {
     public interface IFoodRepository : IRepository<Food>
     {
-        Task UploadImage(Food entity , int lastId);
+        Task UploadImage(Food entity , int lastId = 0);
         Task<Food> UpdateAsync(Food entity);
         
     }

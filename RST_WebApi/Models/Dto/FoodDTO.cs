@@ -25,8 +25,6 @@ namespace RST_WebApi.Models.Dto
         [NotMapped]
         [FromForm]
         public IFormFile File { get; set; }
-        [FromForm]
-        public string FileName { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Hidden {get;set;} = false ;

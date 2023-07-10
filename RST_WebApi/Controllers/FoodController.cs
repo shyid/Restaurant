@@ -112,10 +112,7 @@ namespace RST_WebApi.Controllers
                 {
                     Food food = _mapper.Map<Food>(DtoFood);
 
-                    // var lastId= food.Max(u=>u.Id) +1;
-                    var lastId= food.Id +1;
-
-                    await _dbFood.UploadImage(food , lastId);
+                    await _dbFood.UploadImage(food );
                     await _dbFood.CreateAsync(food);
 
                     _response.Result = _mapper.Map<FoodDTO>(food);

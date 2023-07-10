@@ -18,9 +18,6 @@ namespace RST_WebApi.Models
         [NotMapped]
         [FromForm]
         public IFormFile File { get; set; }
-        [FromForm]
-        public string FileName { get; set; }
-
         
     }
 }

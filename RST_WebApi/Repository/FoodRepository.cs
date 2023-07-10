@@ -15,12 +15,14 @@ namespace RST_WebApi.Repository
         {
             _db = db;
         }
-        public async Task UploadImage(Food entity , int lastId)
+        public async Task UploadImage(Food entity , int lastId=0)
         {
-        //    var lastId= _db.Foods.Max(u=>u.Id) +1;
+            if(lastId == 0){
+                lastId= _db.Foods.Max(u=>u.Id) +1;
+            }
             
             entity.ImageUrl = Path.Combine(@"C:\Users\asus\Desktop\Restaurant\RST_WebApi\Images", 
-                $"{lastId}{entity.FileName}{Path.GetExtension(entity.File.FileName)}");
+                $"{lastId}{entity.File.FileName}");
             // Upload Image to Local Path
             using var stream = new FileStream(entity.ImageUrl, FileMode.Create);
             await entity.File.CopyToAsync(stream);

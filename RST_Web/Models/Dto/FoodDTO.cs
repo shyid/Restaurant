@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -20,10 +21,8 @@ namespace RST_Web.Models.Dto
         public double Rate { get; set; }
         public string? ImageUrl { get; set; }
         [NotMapped]
-        [FromForm]
+        [DisplayName("ImageFile")]
         public IFormFile File { get; set; }
-        [FromForm]
-        public string FileName { get; set; }
         public EVStatus EVStatus {get;set;} 
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
