@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+#result {
+  width: 80%;
+  font-family: monospace;
+  overflow-wrap: break-word;
+}

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\RST_WebApi.csproj": {}
+    "C:\\Users\\asus\\Desktop\\Restaurant\\RST_webapi\\RST_WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\RST_WebApi.csproj": {
+    "C:\\Users\\asus\\Desktop\\Restaurant\\RST_webapi\\RST_WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\RST_WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_webapi\\RST_WebApi.csproj",
         "projectName": "RST_WebApi",
-        "projectPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\RST_WebApi.csproj",
+        "projectPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_webapi\\RST_WebApi.csproj",
         "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\obj\\",
+        "outputPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_webapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config"

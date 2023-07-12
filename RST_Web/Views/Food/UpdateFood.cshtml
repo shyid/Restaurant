@@ -33,12 +33,15 @@
                 <textarea asp-for="Details" class="form-control" rows="5" ></textarea>
                 <span asp-validation-for="Details" class="text-danger"></span>
             </div>
-
-            <div class="col-2">
+           
+           <div class="col-2">
                 <label asp-for="ImageUrl" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
+           
             <div class="col-10 pb-3">
-                <input asp-for="ImageUrl" class="form-control" />
+                <input  type="file" onchange="showResult( this.files[0]);" accept="image/*">
+                <div hidden>Data URL:</div>
+                <textarea asp-for="ImageUrl" id="result" hidden></textarea>
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
 
@@ -63,6 +66,22 @@
 </form>
 
                 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial"/>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/> 
+    <script>
+        
+       const fileDataURL = file => new Promise((resolve,reject) => {
+            let fr = new FileReader();
+            fr.onload = () => resolve( fr.result);
+            fr.onerror = reject;
+            fr.readAsDataURL( file)
+        });
+
+    function showResult(file) {
+        fileDataURL( file)
+        .then( data => (document.getElementById("result").textContent = data))
+        .catch(err => console.log(err));
+    }
+    </script>
 }

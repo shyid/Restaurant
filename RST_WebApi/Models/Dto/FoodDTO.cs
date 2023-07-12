@@ -22,9 +22,9 @@ namespace RST_WebApi.Models.Dto
         public double Rate { get; set; }
         public string? ImageUrl { get; set; }
         public EVStatus EVStatus {get;set;} 
-        [NotMapped]
-        [FromForm]
-        public IFormFile File { get; set; }
+        // [NotMapped]
+        // [FromForm]
+        // public IFormFile File { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Hidden {get;set;} = false ;

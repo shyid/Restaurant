@@ -51,7 +51,7 @@ namespace RST_Web.Controllers
 
                 var response = await _FoodService.CreateAsync<APIResponse>(model, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
-{
+                {
                     TempData["success"] = "Food created successfully";
                     return RedirectToAction(nameof(IndexFood));
                 }

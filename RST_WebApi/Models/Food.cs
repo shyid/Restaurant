@@ -15,9 +15,9 @@ namespace RST_WebApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
        
-        [NotMapped]
-        [FromForm]
-        public IFormFile File { get; set; }
+        // [NotMapped]
+        // [FromForm]
+        // public IFormFile File { get; set; }
         
     }
 }

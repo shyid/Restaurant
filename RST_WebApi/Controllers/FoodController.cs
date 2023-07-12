@@ -99,7 +99,7 @@ namespace RST_WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> CreateFood([FromForm]FoodDTO DtoFood){
+        public async Task<ActionResult<APIResponse>> CreateFood(/*[FromForm]*/FoodDTO DtoFood){
             try{
 
                 if(DtoFood == null) {
@@ -107,12 +107,13 @@ namespace RST_WebApi.Controllers
                     _response.IsSuccess = false;
                     return NotFound(_response);
                 }
-                ValidateFileUpload(DtoFood);
+                // ValidateFileUpload(DtoFood);
                 if (ModelState.IsValid)
                 {
                     Food food = _mapper.Map<Food>(DtoFood);
-
-                    await _dbFood.UploadImage(food );
+                    if(food.ImageUrl is not null)
+                        food.ImageUrl = await _dbFood.ConvertTobase64(food.ImageUrl);
+                    // await _dbFood.UploadImage(food );
                     await _dbFood.CreateAsync(food);
 
                     _response.Result = _mapper.Map<FoodDTO>(food);
@@ -168,21 +169,21 @@ namespace RST_WebApi.Controllers
         [HttpPut("{id:int}",Name="UpdateFood")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<APIResponse>> UpdateFood(int id,[FromForm]FoodDTO DtoFood){
+        public async Task<ActionResult<APIResponse>> UpdateFood(int id,FoodDTO DtoFood){
             try{
                 if(id != DtoFood.Id || DtoFood== null) {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                ValidateFileUpload(DtoFood);
+                // ValidateFileUpload(DtoFood);
                 if (ModelState.IsValid)
                 {
                     Food model = _mapper.Map<Food>(DtoFood);
                     
-                    var lastId= model.Id ;
-
-                    await _dbFood.UploadImage(model,lastId);
+                    if(model.ImageUrl is not null)
+                        model.ImageUrl =await _dbFood.ConvertTobase64(model.ImageUrl,model.Id);
+                    // await _dbFood.UploadImage(model,model.lastId);
                     await _dbFood.UpdateAsync(model);
                     _response.StatusCode = HttpStatusCode.NoContent;
                     _response.IsSuccess = true;
@@ -215,19 +216,20 @@ namespace RST_WebApi.Controllers
             return NoContent();
         }
 
-        private void ValidateFileUpload(FoodDTO request)
-        {
-            var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png" };
+        // private void ValidateFileUpload(FoodDTO request)
+        // {
+        //     var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png" };
 
-            if (!allowedExtensions.Contains(Path.GetExtension(request.File.FileName)))
-            {
-                ModelState.AddModelError("file", "Unsupported file extension");
-            }
+        //     if (!allowedExtensions.Contains(Path.GetExtension(request.File.FileName)))
+        //     {
+        //         ModelState.AddModelError("file", "Unsupported file extension");
+        //     }
 
-            if (request.File.Length > 10485760)
-            {
-                ModelState.AddModelError("file", "File size more than 10MB, please upload a smaller size file.");
-            }
-        }
+        //     if (request.File.Length > 10485760)
+        //     {
+        //         ModelState.AddModelError("file", "File size more than 10MB, please upload a smaller size file.");
+        //     }
+        // }
+        
     }
 }

@@ -19,10 +19,11 @@ namespace RST_Web.Models.Dto
         public string? Details { get; set; }
         [Required]
         public double Rate { get; set; }
-        public string? ImageUrl { get; set; }
-        [NotMapped]
         [DisplayName("ImageFile")]
-        public IFormFile File { get; set; }
+        public string ImageUrl { get; set; } =string.Empty;
+        // public IFormFile File { get; set; }
+        // [NotMapped]
+        // [DisplayName("ImageFile")]
         public EVStatus EVStatus {get;set;} 
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
