@@ -25,6 +25,9 @@
 				<th>
 					Image
 				</th>
+				<th>
+					shopping cart
+				</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -35,6 +38,7 @@
 					<td>@item.Details</td>
 					<td>@((item.Rate).ToString("c"))</td>
 					<td><img src="data:image/png;base64,@item.ImageUrl" alt="foodImage" width="100" height="100"/></td>
+					<td><button type="button" onclick="add(@item.Id)" class="btn btn-primary">Add to cart</button></td>
 					<td>
 						<a asp-controller="Food" asp-action="UpdateFood" asp-route-FoodId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
 						<a asp-controller="Food" asp-action="DeleteFood" asp-route-FoodId="@item.Id"  class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>

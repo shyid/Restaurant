@@ -21,10 +21,13 @@ namespace RST_WebApi.Data
         public DbSet<Food> Foods { get; set; }
         public DbSet<Drink> Drinks { get; set; }
         public DbSet<Appetize> Appetizes { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems{ get; set; }
         public DbSet<LocalUser> LocalUsers{ get; set; }
         public DbSet<ImageFile> imageFiles{ get; set; }
+        public DbSet<ShoppingCart> shoppingCarts{ get; set; }
+        public DbSet<CartItem> cartItems{ get; set; }
+        
+        public DbSet<OrderHeader> orderHeaders { get; set; }
+        public DbSet<OrderDetails> orderDetails{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

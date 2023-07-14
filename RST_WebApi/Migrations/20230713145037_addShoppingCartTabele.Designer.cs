@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RST_WebApi.Data;
 
@@ -11,9 +12,11 @@ using RST_WebApi.Data;
 namespace RST_WebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230713145037_addShoppingCartTabele")]
+    partial class addShoppingCartTabele
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,32 +264,6 @@ namespace RST_WebApi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("RST_WebApi.Models.CartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("FoodId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FoodId");
-
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("cartItems");
-                });
-
             modelBuilder.Entity("RST_WebApi.Models.Drink", b =>
                 {
                     b.Property<int>("Id")
@@ -413,82 +390,66 @@ namespace RST_WebApi.Migrations
                     b.ToTable("LocalUsers");
                 });
 
-            modelBuilder.Entity("RST_WebApi.Models.OrderDetails", b =>
+            modelBuilder.Entity("RST_WebApi.Models.OrderItemUser", b =>
                 {
-                    b.Property<int>("OrderDetailId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("FoodId")
+                    b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("FoodName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderHeaderId")
+                    b.Property<int>("IdFood")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("OrderDetailId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("FoodId");
+                    b.HasIndex("IdFood");
 
-                    b.HasIndex("OrderHeaderId");
+                    b.HasIndex("OrderId");
 
-                    b.ToTable("orderDetails");
+                    b.ToTable("OrderItemUsers");
                 });
 
-            modelBuilder.Entity("RST_WebApi.Models.OrderHeader", b =>
+            modelBuilder.Entity("RST_WebApi.Models.OrderUser", b =>
                 {
-                    b.Property<int>("OrderHeaderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderHeaderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("OrderDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("OrderTotal")
-                        .HasColumnType("float");
-
-                    b.Property<string>("PickupEmail")
-                        .IsRequired()
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PickupName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("PickupPhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.Property<string>("StripePaymentIntentID")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("UserId");
 
-                    b.Property<int>("TotalItems")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderHeaderId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("orderHeaders");
+                    b.ToTable("OrderUsers");
                 });
 
             modelBuilder.Entity("RST_WebApi.Models.ShoppingCart", b =>
@@ -502,12 +463,17 @@ namespace RST_WebApi.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("FoodId");
 
                     b.ToTable("shoppingCarts");
                 });
@@ -563,45 +529,30 @@ namespace RST_WebApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RST_WebApi.Models.CartItem", b =>
+            modelBuilder.Entity("RST_WebApi.Models.OrderItemUser", b =>
                 {
-                    b.HasOne("RST_WebApi.Models.Food", "foodItem")
+                    b.HasOne("RST_WebApi.Models.Food", "Food")
                         .WithMany()
-                        .HasForeignKey("FoodId")
+                        .HasForeignKey("IdFood")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RST_WebApi.Models.ShoppingCart", null)
-                        .WithMany("CartItems")
-                        .HasForeignKey("ShoppingCartId")
+                    b.HasOne("RST_WebApi.Models.OrderUser", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("foodItem");
+                    b.Navigation("Food");
+
+                    b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("RST_WebApi.Models.OrderDetails", b =>
-                {
-                    b.HasOne("RST_WebApi.Models.Food", "foodItem")
-                        .WithMany()
-                        .HasForeignKey("FoodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RST_WebApi.Models.OrderHeader", null)
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderHeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("foodItem");
-                });
-
-            modelBuilder.Entity("RST_WebApi.Models.OrderHeader", b =>
+            modelBuilder.Entity("RST_WebApi.Models.OrderUser", b =>
                 {
                     b.HasOne("RST_WebApi.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -612,17 +563,20 @@ namespace RST_WebApi.Migrations
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
+                    b.HasOne("RST_WebApi.Models.Food", "food")
+                        .WithMany()
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("food");
                 });
 
-            modelBuilder.Entity("RST_WebApi.Models.OrderHeader", b =>
+            modelBuilder.Entity("RST_WebApi.Models.OrderUser", b =>
                 {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("RST_WebApi.Models.ShoppingCart", b =>
-                {
-                    b.Navigation("CartItems");
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,6 +15,7 @@ using RST_WebApi.Models;
 using RST_WebApi.Models.Dto;
 using RST_WebApi.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace RST_WebApi.Controllers
 {
@@ -215,7 +216,7 @@ namespace RST_WebApi.Controllers
             if(!ModelState.IsValid) return BadRequest(ModelState);
             return NoContent();
         }
-
+ 
         // private void ValidateFileUpload(FoodDTO request)
         // {
         //     var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png" };
