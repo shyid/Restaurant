@@ -107,6 +107,8 @@ namespace RST_WebApi.Controllers
                 }
 
                 Drink Drink = _mapper.Map<Drink>(DtoDrink);
+                if(Drink.ImageUrl is not null)
+                    await _dbDrink.ConvertTobase64(Drink.ImageUrl);
 
                 await _dbDrink.CreateAsync(Drink);
 
@@ -171,6 +173,8 @@ namespace RST_WebApi.Controllers
                 }
 
                 Drink model = _mapper.Map<Drink>(DtoDrink);
+                if(model.ImageUrl is not null)
+                    await _dbDrink.ConvertTobase64(model.ImageUrl,model.Id);
                 await _dbDrink.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;

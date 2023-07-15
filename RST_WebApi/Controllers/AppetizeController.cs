@@ -107,7 +107,8 @@ namespace RST_WebApi.Controllers
                 }
 
                 Appetize Appetize = _mapper.Map<Appetize>(DtoAppetize);
-
+                if(Appetize.ImageUrl is not null)
+                    await _dbAppetize.ConvertTobase64(Appetize.ImageUrl);
                 await _dbAppetize.CreateAsync(Appetize);
 
                 _response.Result = _mapper.Map<AppetizeDTO>(Appetize);
@@ -171,6 +172,8 @@ namespace RST_WebApi.Controllers
                 }
 
                 Appetize model = _mapper.Map<Appetize>(DtoAppetize);
+                if(model.ImageUrl is not null)
+                    await _dbAppetize.ConvertTobase64(model.ImageUrl,model.Id);
                 await _dbAppetize.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;

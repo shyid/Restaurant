@@ -15,6 +15,18 @@ namespace RST_WebApi.Repository
         {
             _db = db;
         }
+        public async Task ConvertTobase64(string responseFile , int lastId=0)
+        {
+            if(lastId == 0){
+                lastId= _db.Drinks.Max(u=>u.Id) +1;
+            }
+            var index = responseFile.IndexOf(',');
+            responseFile = responseFile.Substring(index+1);
+            byte[] bytes = Convert.FromBase64String(responseFile);
+            await System.IO.File.WriteAllBytesAsync("images/"+lastId+".png" , bytes );
+            
+            // return responseFile;
+        }
         public async Task<Drink> UpdateAsync(Drink entity)
         {
             entity.UpdatedDate = DateTime.Now;
