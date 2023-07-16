@@ -1,6 +1,6 @@
 namespace RST_WebApi.Models
 {
-    public enum Ctegory
+    public enum Category
     {
         FastFood, Beverage ,Appetizer
     }

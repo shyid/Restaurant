@@ -14,7 +14,7 @@ namespace RST_WebApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public Ctegory ctegory {get;set;} = Ctegory.FastFood;
+        public Category category {get;set;} = Category.FastFood;
         [Required]
         public string Name { get; set; }
         public string? Details { get; set; }

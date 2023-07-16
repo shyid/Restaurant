@@ -17,7 +17,7 @@ namespace RST_WebApi.Models.Dto
         [MaxLength(30)]
         
         public string Name { get; set; }
-        public Ctegory ctegory {get;set;} = Ctegory.FastFood;
+        public Category category {get;set;} = Category.FastFood;
         public string? Details { get; set; }
         [Required]
         public double Rate { get; set; }
