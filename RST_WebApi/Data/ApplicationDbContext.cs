@@ -16,11 +16,8 @@ namespace RST_WebApi.Data
             : base(options)
         {
         }
-        // public DbSet<RSTClassBase> RSTClassBases { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Food> Foods { get; set; }
-        public DbSet<Drink> Drinks { get; set; }
-        public DbSet<Appetize> Appetizes { get; set; }
         public DbSet<LocalUser> LocalUsers{ get; set; }
         public DbSet<ImageFile> imageFiles{ get; set; }
         public DbSet<ShoppingCart> shoppingCarts{ get; set; }

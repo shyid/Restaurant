@@ -14,8 +14,6 @@ namespace RST_WebApi
         public MappingConfig()
         {
             CreateMap<Food, FoodDTO>().ReverseMap();
-            CreateMap<Drink, DrinkDTO>().ReverseMap();
-            CreateMap<Appetize, AppetizeDTO>().ReverseMap();
             // CreateMap<OrderHeader, OrderDTO>().ReverseMap();
             // CreateMap<OrderDetails, OrderItemDTO>().ReverseMap();
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
