@@ -4764,19 +4764,22 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_webapi\\RST_WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\RST_WebApi.csproj",
       "projectName": "RST_WebApi",
-      "projectPath": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_webapi\\RST_WebApi.csproj",
+      "projectPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\RST_WebApi.csproj",
       "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\asus\\Desktop\\Restaurant\\rst_webapi\\obj\\",
+      "outputPath": "C:\\Users\\asus\\Desktop\\Restaurant\\RST_WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4883,7 +4886,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }

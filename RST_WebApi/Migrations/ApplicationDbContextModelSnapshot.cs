@@ -282,7 +282,7 @@ namespace RST_WebApi.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ctegory")
+                    b.Property<int>("category")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
